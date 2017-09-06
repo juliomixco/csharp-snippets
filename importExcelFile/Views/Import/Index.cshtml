@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>@Html.FormTitle()</h2><br>
+@*@@Html.Action("GridViewPartial")*@
+
+<form action="" method="post" enctype="multipart/form-data">
+
+    @*<label for="file">Select a file:</label>*@
+    <div class="fileUpload btn btn-TestProject-primary">
+        <span>Select File</span>
+        <input type="file" name="file" id="file" class="upload bordercontrol-colorprimary TestProject-placeholder1" accept=".xls, .xlsx, .xml" />
+    </div>
+    <input id="uploadFile" placeholder="Choose File" disabled="disabled" style="min-width:300px" />
+    @*<input type="file" name="file" id="file" class="upload bordercontrol-colorprimary TestProject-placeholder1" />*@
+    <br />
+    <br />
+    <div class="">
+        <input type="submit" class="btn btn-TestProject-primary" value="Submit" />
+    </div>
+</form>
+
+@section Scripts{
+    <script type="text/javascript">
+        //$("#file").onchange = function () {
+        //    $("#uploadFile").value = this.value;
+        //};
+        document.getElementById("file").onchange = function () {
+            document.getElementById("uploadFile").value = this.value;
+        };
+    </script>
+
+}

@@ -1,0 +1,93 @@
+﻿@model STestProjectAreas.Import.Models.FieldListVM
+
+@{
+    ViewBag.Title = "chooseFields";
+}
+
+<h2>@Html.FormTitle()</h2>
+
+<div>
+    <h4>Import Account</h4>
+    <hr />
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @*<dl class="dl-horizontal">*@
+        <table>
+            <tr>
+                <th>Field</th>
+                <th>File Column</th>
+            </tr>
+            @{
+                int i = 0;
+                string fieldstr = "fieldList[";
+                string namestr = "";
+            }
+            @*@foreach (var item in Model.fieldList)
+                {
+                    //List<SelectListItem> slctlist = new List<SelectListItem>(Model.fileColumns);
+                    ////Model.fileColumns.CopyTo(slctlist);
+                    //foreach (var col in slctlist)//Model.fileColumns)
+                    //{
+                    //    col.Selected = col.Text.ToLower().Equals(item.field.ToLower());
+                    //}
+                    namestr = fieldstr + i + "].field";
+                    <tr>
+                        <td>
+                            @item.field
+
+                            <input type="hidden" name='@namestr' value="@item.field"/>
+                        </td>
+                        <td>
+                            @Html.DropDownListFor(modelItem => item.column, new SelectList(Model.fileColumns, "Value", "Text", item.column), new { htmlAttributes = new { @class = "form-control",name= "fieldList["+i+ "].column" } })
+
+
+                        </td>
+                    </tr>
+                    i++;
+                }*@
+            @for (var index = 0; index < Model.fieldList.Count(); index++)
+            {
+
+                <tr>
+                    <td>
+                        @Model.fieldList[index].field
+
+                        @*<input type="hidden" name='@namestr' value="@Model.fieldList[index].field" />*@
+                        @Html.HiddenFor(x => Model.fieldList[index].field)
+                    </td>
+
+                    @if (Model.fieldList[index].required)
+                    {
+                        <td>
+                            @Html.DropDownListFor(modelItem => Model.fieldList[index].column, new SelectList(Model.fileColumns, "Value", "Text", Model.fieldList[index].field), new { @class = "form-control", required = "required", data_val = "true", data_val_required = "Required field." })
+                            @Html.ValidationMessageFor(modelItem => Model.fieldList[index].column, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            <span>*</span>
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            @Html.DropDownListFor(modelItem => Model.fieldList[index].column, new SelectList(Model.fileColumns, "Value", "Text", Model.fieldList[index].field), new { @class = "form-control" })
+                        </td>
+                    }
+
+
+
+                </tr>
+
+            }
+        </table>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Import" class="btn btn-TestProject-primary" />
+            </div>
+        </div>
+
+                }
+</div>
+@section Scripts {
+    @*@Scripts.Render("~/bundles/jqueryval")*@
+}
