@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Wizzard</h2>
+<div class="jumbotron" ng-controller="modalCtrl" ng-init="openw()"></div>
+<style>
+    .app-modal-window .modal-dialog {
+  width: 80%;
+}
+</style>
+@section Styles{
+    @Styles.Render("~/bundles/sweetAlert/css")
+    }
+@section Scripts
+    {
+    @Scripts.Render("~/bundles/sweetAlert/js")
+    @Scripts.Render("~/bundles/angular/scripts")
+
+}
