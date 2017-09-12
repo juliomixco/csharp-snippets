@@ -4,12 +4,18 @@ function tableController($scope, DataProviderService) {
   const vm = this;
   vm.people = [];
   vm.currentPerson = {};
+  vm.countries = [];
+  vm.currencies = [];
   vm.init = init;
   vm.addPerson = addPerson;
+  vm.getCountries = getCountries;
+  vm.getCurrencies = getCurrencies;
 
   function init() {
     console.log('init');
     vm.people = DataProviderService.getPeople();
+    getCountries();
+    getCurrencies();
   }
 
   function addPerson() {
@@ -19,5 +25,13 @@ function tableController($scope, DataProviderService) {
     vm.people.push(vm.currentPerson);
     vm.currentPerson = {}; // clean object
   }
+
+  function getCountries() {
+    vm.countries = DataProviderService.getCountries();
+  };
+
+  function getCurrencies() {
+    vm.currencies = DataProviderService.getCurrencies();
+  };
 
 }

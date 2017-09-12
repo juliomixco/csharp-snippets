@@ -30,6 +30,20 @@
       <div class="col-md-6 col-md-offset-3">
         <div class="row">
           <form name="personForm">
+            <div class="form-group" ng-class="{ 'has-error' : personForm.country.$invalid && !personForm.country.$pristine }">
+              <label for="country">Country</label>
+              <select name="country" class="form-control" ng-model="$ctrl.currentPerson.country">
+                <option ng-repeat="c in $ctrl.countries" value="{{c.id}}">{{c.name}}</option>
+              </select>
+              <p ng-show="personForm.country.$invalid && !personForm.country.$pristine" class="help-block">Country is required.</p>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error' : personForm.currency.$invalid && !personForm.currency.$pristine }">
+              <label for="currency">currency</label>
+              <select name="currency" class="form-control" ng-model="$ctrl.currentPerson.currency">
+                  <option ng-repeat="c in $ctrl.currencies" value="{{c.id}}">{{c.moneda}}</option>
+                </select>
+              <p ng-show="personForm.currency.$invalid && !personForm.currency.$pristine" class="help-block">Country is required.</p>
+            </div>
             <div class="form-group" ng-class="{ 'has-error' : personForm.name.$invalid && !personForm.name.$pristine }">
               <label for="name">Name</label>
               <input type="text" name="name" class="form-control" ng-model="$ctrl.currentPerson.name" required>
