@@ -45,10 +45,10 @@
             <div class="form-group" ng-class="{ 'has-error' : personForm.money.$invalid && !personForm.money.$pristine }">
               <label for="money">Money</label>
               <input type="number" name="money" class="form-control" ng-model="$ctrl.currentPerson.money" max="1000" required>
-              <p ng-show="personForm.money.$invalid && !personForm.name.$pristine" class="help-block">Name is required.</p>
+              <p ng-show="personForm.money.$invalid && !personForm.money.$pristine" class="help-block">Name is required.</p>
               <p ng-show="personForm.money.$error.max" class="help-block">Max value is 1000.</p>
             </div>
-            <button class="button primary" ng-click="$ctrl.addPerson();" ng-disabled="personForm.$invalid">Add</button>
+            <button class="btn btn-primary" ng-click="$ctrl.addPerson();" ng-disabled="personForm.$invalid">Add</button>
           </form>
         </div>
         <div class="row">
