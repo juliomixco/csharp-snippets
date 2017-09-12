@@ -29,19 +29,27 @@
 
       <div class="col-md-6 col-md-offset-3">
         <div class="row">
-          <div class="form-group">
-            <label for="exampleInputEmail1">Name</label>
-            <input type="text" class="form-control" ng-model="$ctrl.currentPerson.name">
-          </div>
-          <div class="form-group">
-            <label for="exampleInputEmail1">Last Name</label>
-            <input type="text" class="form-control" ng-model="$ctrl.currentPerson.lastname">
-          </div>
-          <div class="form-group">
-            <label for="exampleInputEmail1">Money</label>
-            <input type="number" class="form-control" ng-model="$ctrl.currentPerson.money">
-          </div>
-          <button class="button primary" ng-click="$ctrl.addPerson();">Add</button>
+          <form name="personForm">
+            <div class="form-group" ng-class="{ 'has-error' : personForm.name.$invalid && !personForm.name.$pristine }">
+              <label for="name">Name</label>
+              <input type="text" name="name" class="form-control" ng-model="$ctrl.currentPerson.name" required>
+              <p ng-show="personForm.name.$invalid && !personForm.name.$pristine" class="help-block">Name is required.</p>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error' : personForm.lastname.$invalid && !personForm.lastname.$pristine }">
+              <label for="lastname">Last Name</label>
+              <input type="text" name="lastname" class="form-control" ng-model="$ctrl.currentPerson.lastname" ng-minlength="3" ng-maxlength="10" required>
+              <p ng-show="personForm.lastname.$invalid && !personForm.lastname.$pristine" class="help-block">Last Name is required.</p>
+              <p ng-show="personForm.lastname.$error.minlength" class="help-block">Last is too short.</p>
+              <p ng-show="personForm.lastname.$error.maxlength" class="help-block">Last is too long.</p>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error' : personForm.money.$invalid && !personForm.money.$pristine }">
+              <label for="money">Money</label>
+              <input type="number" name="money" class="form-control" ng-model="$ctrl.currentPerson.money" max="1000" required>
+              <p ng-show="personForm.money.$invalid && !personForm.name.$pristine" class="help-block">Name is required.</p>
+              <p ng-show="personForm.money.$error.max" class="help-block">Max value is 1000.</p>
+            </div>
+            <button class="button primary" ng-click="$ctrl.addPerson();" ng-disabled="personForm.$invalid">Add</button>
+          </form>
         </div>
         <div class="row">
 
